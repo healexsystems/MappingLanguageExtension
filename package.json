@@ -1,0 +1,25 @@
+{
+    "name": "hl7-mapping-language-support",
+    "displayName": "HL7 Mapping Language Support",
+    "description": "hl7 .map files support",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.47.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "map",
+            "aliases": ["hl7 mapping language", "map"],
+            "extensions": [".map"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "map",
+            "scopeName": "source.map",
+            "path": "./syntaxes/map.tmLanguage.json"
+        }]
+    }
+}

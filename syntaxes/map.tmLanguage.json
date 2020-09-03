@@ -1,0 +1,923 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "hl7 mapping language",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#map-name"
+		},
+		{
+			"include": "#uses-statement"
+		},
+		{
+			"include": "#imports"
+		},
+		{
+			"include": "#script-top-level"
+		}
+	],
+	"repository": {
+		"map-name": {
+			"begin": "(?<!\\.)\\b(map)\\b",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.map.map"
+				}
+			},
+			"end": "(?<=$)",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#operator-assignment"
+				},
+				{
+					"include": "#strings"
+				}
+			]
+		},
+		"uses-statement": {
+			"begin": "(?<!\\.)\\b(uses)\\b",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.uses.map"
+				}
+			},
+			"end": "(?<=$)",
+			"patterns": [
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#uses-statement-keywords"
+				},
+				{
+					"name": "entity.name.type.alias.map",
+					"match": "@?[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"include": "#comment"
+				}
+			]
+		},
+		"imports": {
+			"begin": "(?<!\\.)\\b(imports)\\b",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.imports.map"
+				}
+			},
+			"end": "(?<=$)",
+			"patterns": [
+				{
+					"include": "#strings"
+				}
+			]
+		},
+		"script-top-level": {
+			"patterns": [
+				{
+					"include": "#method-declaration"
+				},
+				{
+					"include": "#statement"
+				},
+				{
+					"include": "#punctuation-semicolon"
+				}
+			]
+		},
+		"method-declaration": {
+			"begin": "(?<!\\.)\\b(group)\\b",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.group.map"
+				}
+			},
+			"end": "(?<=$)",
+			"patterns": [
+				{
+					"name": "entity.name.function.map",
+					"match": "@?[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"include": "#parameter-list"
+				},
+				{
+					"include": "#comment"
+				}
+			]
+		},
+		"block": {
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.curlybrace.open.map"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.curlybrace.close.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#statement"
+				}
+			]
+		},
+		"statement": {
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#labeled-statement"
+				},
+				{
+					"include": "#operator-arrow"
+				},
+				{
+					"include": "#block"
+				},
+				{
+					"include": "#expression"
+				},
+				{
+					"include": "#punctuation-semicolon"
+				},
+				{
+					"include": "punctuation-comma"
+				}
+			]
+		},
+		"expression": {
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#expression-operators"
+				},
+				{
+					"include": "#as-expression"
+				},
+				{
+					"include": "#invocation-expression"
+				},
+				{
+					"include": "#member-access-expression"
+				},
+				{
+					"include": "#element-access-expression"
+				},
+				{
+					"include": "#literal"
+				},
+				{
+					"include": "#parenthesized-expression"
+				},
+				{
+					"include": "#initializer-expression"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#identifier"
+				}
+
+			]
+		},
+		"literal": {
+			"patterns": [
+				{
+					"include": "#boolean-literal"
+				},
+				{
+					"include": "#null-literal"
+				},
+				{
+					"include": "#numeric-literal"
+				},
+				{
+					"include": "#char-literal"
+				},
+				{
+					"include": "#string-literal"
+				}
+			]
+		},
+		"boolean-literal": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.true.map",
+					"match": "(?<!\\.)\\btrue\\b"
+				},
+				{
+					"name": "constant.language.boolean.false.map",
+					"match": "(?<!\\.)\\bfalse\\b"
+				}
+			]
+		},
+		"null-literal": {
+			"name": "constant.language.null.map",
+			"match": "(?<!\\.)\\bnull\\b"
+		},
+		"numeric-literal": {
+			"patterns": [
+				{
+					"name": "constant.numeric.hex.map",
+					"match": "\\b0(x|X)[0-9a-fA-F_]+(U|u|L|l|UL|Ul|uL|ul|LU|Lu|lU|lu)?\\b"
+				},
+				{
+					"name": "constant.numeric.binary.map",
+					"match": "\\b0(b|B)[01_]+(U|u|L|l|UL|Ul|uL|ul|LU|Lu|lU|lu)?\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.map",
+					"match": "\\b([0-9_]+)?\\.[0-9_]+((e|E)[0-9]+)?(F|f|D|d|M|m)?\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.map",
+					"match": "\\b[0-9_]+(e|E)[0-9_]+(F|f|D|d|M|m)?\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.map",
+					"match": "\\b[0-9_]+(F|f|D|d|M|m)\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.map",
+					"match": "\\b[0-9_]+(U|u|L|l|UL|Ul|uL|ul|LU|Lu|lU|lu)?\\b"
+				}
+			]
+		},
+		"char-literal": {
+			"name": "string.quoted.single.map",
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.char.begin.map"
+				}
+			},
+			"end": "(\\')|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.char.end.map"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#char-character-escape"
+				}
+			]
+		},
+		"char-character-escape": {
+			"name": "constant.character.escape.map",
+			"match": "\\\\(['\"\\\\0abfnrtv]|x[0-9a-fA-F]{1,4}|u[0-9a-fA-F]{4})"
+		},
+		"string-literal": {
+			"name": "string.quoted.double.map",
+			"begin": "(?<!@)\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.map"
+				}
+			},
+			"end": "(\")|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.map"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+		},
+		"string-character-escape": {
+			"name": "constant.character.escape.map",
+			"match": "\\\\(['\"\\\\0abfnrtv]|x[0-9a-fA-F]{1,4}|U[0-9a-fA-F]{8}|u[0-9a-fA-F]{4})"
+		},
+		"expression-operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.compound.map",
+					"match": "\\*=|/=|%=|\\+=|-="
+				},
+				{
+					"name": "keyword.operator.assignment.compound.bitwise.map",
+					"match": "\\&=|\\^=|<<=|>>=|\\|="
+				},
+				{
+					"name": "keyword.operator.bitwise.shift.map",
+					"match": "<<|>>"
+				},
+				{
+					"name": "keyword.operator.comparison.map",
+					"match": "==|!="
+				},
+				{
+					"name": "keyword.operator.arrow.map",
+					"match": "->"
+				},
+				{
+					"name": "keyword.operator.relational.map",
+					"match": "<=|>=|<|>"
+				},
+				{
+					"name": "keyword.operator.logical.map",
+					"match": "\\!|&&|\\|\\|"
+				},
+				{
+					"name": "keyword.operator.bitwise.map",
+					"match": "\\&|~|\\^|\\|"
+				},
+				{
+					"name": "keyword.operator.assignment.map",
+					"match": "\\="
+				},
+				{
+					"name": "keyword.operator.decrement.map",
+					"match": "--"
+				},
+				{
+					"name": "keyword.operator.increment.map",
+					"match": "\\+\\+"
+				},
+				{
+					"name": "keyword.operator.arithmetic.map",
+					"match": "%|\\*|/|-|\\+"
+				},
+				{
+					"name": "keyword.operator.null-coalescing.map",
+					"match": "\\?\\?"
+				}
+			]
+		},
+		"element-access-expression": {
+			"begin": "(?x)\n(?:(\\?)\\s*)?                        # preceding null-conditional operator?\n(?:(\\.)\\s*)?                        # preceding dot?\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*)? # property name\n(?:(\\?)\\s*)?                        # null-conditional operator?\n(?=\\[)                              # open bracket of argument list",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.operator.null-conditional.map"
+				},
+				"2": {
+					"name": "punctuation.accessor.map"
+				},
+				"3": {
+					"name": "variable.other.object.property.map"
+				},
+				"4": {
+					"name": "keyword.operator.null-conditional.map"
+				}
+			},
+			"end": "(?<=\\])(?!\\s*\\[)"
+		},
+		"as-expression": {
+			"match": "(?x)\n(?<!\\.)\\b(as)\\b\\s*\n(?<type-name>\n  (?:\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name-and-type-args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n  )\n)?",
+			"captures": {
+				"1": {
+					"name": "keyword.other.as.map"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					]
+				}
+			}
+		},
+		"initializer-expression": {
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.curlybrace.open.map"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.curlybrace.close.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expression"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"invocation-expression": {
+			"begin": "(?x)\n(?:(\\?)\\s*)?                                     # preceding null-conditional operator?\n(?:(\\.)\\s*)?                                     # preceding dot?\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*                   # method name\n(?<type-args>\\s*<([^<>]|\\g<type-args>)+>\\s*)?\\s* # type arguments\n(?=\\()                                           # open paren of argument list",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.operator.null-conditional.map"
+				},
+				"2": {
+					"name": "punctuation.accessor.map"
+				},
+				"3": {
+					"name": "entity.name.function.map"
+				}
+			},
+			"end": "(?<=\\))",
+			"patterns": [
+				{
+					"include": "#argument-list"
+				}
+			]
+		},
+		"parenthesized-expression": {
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.parenthesis.open.map"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.parenthesis.close.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"argument-list": {
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.parenthesis.open.map"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.parenthesis.close.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#named-argument"
+				},
+				{
+					"include": "#argument"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"argument": {
+			"patterns": [
+				{
+					"include": "#declaration-expression-local"
+				},
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"declaration-expression-local": {
+			"match": "(?x) # e.g. int x OR var x\n(?:\n  \\b(var)\\b|\n  (?<type-name>\n    (?:\n      (?:\n        (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n        (?<name-and-type-args> # identifier + type arguments (if any)\n          \\g<identifier>\\s*\n          (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n        )\n        (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n        (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n      )\n      (?:\\s*\\?\\s*)? # nullable suffix?\n      (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n    )\n  )\n)\\s+\n(\\g<identifier>)\\b\\s*\n(?=[,)\\]])",
+			"captures": {
+				"2": {
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					]
+				},
+				"7": {
+					"name": "entity.name.variable.local.map"
+				}
+			}
+		},
+		"local-declaration": {
+			"patterns": [
+				{
+					"include": "#local-constant-declaration"
+				},
+				{
+					"include": "#local-variable-declaration"
+				}
+			]
+		},
+		"local-variable-declaration": {
+			"begin": "(?x)\n(?:\n  (?:(\\bref)\\s+(?:(\\breadonly)\\s+)?)?(\\bvar\\b)| # ref local\n  (?<type-name>\n    (?:\n      (?:ref\\s+(?:readonly\\s+)?)?   # ref local\n      (?:\n        (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n        (?<name-and-type-args> # identifier + type arguments (if any)\n          \\g<identifier>\\s*\n          (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n        )\n        (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n        (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n      )\n      (?:\\s*\\?\\s*)? # nullable suffix?\n      (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n    )\n  )\n)\\s+\n(\\g<identifier>)\\s*\n(?!=>)\n(?=,|;|=|\\))",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.map"
+				},
+				"2": {
+					"name": "storage.modifier.map"
+				},
+				"3": {
+					"name": "keyword.other.var.map"
+				},
+				"4": {
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					]
+				},
+				"9": {
+					"name": "entity.name.variable.local.map"
+				}
+			},
+			"end": "(?=;|\\))",
+			"patterns": [
+				{
+					"name": "entity.name.variable.local.map",
+					"match": "@?[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"include": "#punctuation-comma"
+				},
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#variable-initializer"
+				}
+			]
+		},
+		"member-access-expression": {
+			"patterns": [
+				{
+					"match": "(?x)\n(?:(\\?)\\s*)?                   # preceding null-conditional operator?\n(\\.)\\s*                        # preceding dot\n(@?[_[:alpha:]][_[:alnum:]]*)\\s* # property name\n(?![_[:alnum:]]|\\(|(\\?)?\\[|<)  # next character is not alpha-numeric, nor a (, [, or <. Also, test for ?[",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.null-conditional.map"
+						},
+						"2": {
+							"name": "punctuation.accessor.map"
+						},
+						"3": {
+							"name": "variable.other.object.property.map"
+						}
+					}
+				},
+				{
+					"match": "(?x)\n(\\.)?\\s*\n(@?[_[:alpha:]][_[:alnum:]]*)\n(?<type-params>\\s*<([^<>]|\\g<type-params>)+>\\s*)\n(?=\n  (\\s*\\?)?\n  \\s*\\.\\s*@?[_[:alpha:]][_[:alnum:]]*\n)",
+					"captures": {
+						"1": {
+							"name": "punctuation.accessor.map"
+						},
+						"2": {
+							"name": "variable.other.object.map"
+						}
+					}
+				},
+				{
+					"match": "(?x)\n(@?[_[:alpha:]][_[:alnum:]]*)\n(?=\n  (\\s*\\?)?\n  \\s*\\.\\s*@?[_[:alpha:]][_[:alnum:]]*\n)",
+					"captures": {
+						"1": {
+							"name": "variable.other.object.map"
+						}
+					}
+				}
+			]
+		},
+		"local-constant-declaration": {
+			"begin": "(?x)\n(?<const-keyword>\\b(?:const)\\b)\\s*\n(?<type-name>\n  (?:\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name-and-type-args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n  )\n)\\s+\n(\\g<identifier>)\\s*\n(?=,|;|=)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.map"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					]
+				},
+				"7": {
+					"name": "entity.name.variable.local.map"
+				}
+			},
+			"end": "(?=;)",
+			"patterns": [
+				{
+					"name": "entity.name.variable.local.map",
+					"match": "@?[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"include": "#punctuation-comma"
+				},
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#variable-initializer"
+				}
+			]
+		},
+		"variable-initializer": {
+			"begin": "(?<!=|!)(=)(?!=|>)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.operator.assignment.map"
+				}
+			},
+			"end": "(?=[,\\)\\];}])",
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"identifier": {
+			"name": "variable.other.readwrite.map",
+			"match": "@?[_[:alpha:]][_[:alnum:]]*"
+		},
+		"labeled-statement": {
+			"match": "(@?[_[:alpha:]][_[:alnum:]]*)\\s*(:)",
+			"captures": {
+				"1": {
+					"name": "entity.name.label.map"
+				},
+				"2": {
+					"name": "punctuation.separator.colon.map"
+				}
+			}
+		},
+		"parameter-list": {
+			"begin": "(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.uses.map"
+				}
+			},
+			"end": "(\\))",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.parenthesis.close.map"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#method-parameters-keywords"
+				},
+				{
+					"include": "#parameter-type-annotation"
+				},
+				{
+					"name": "entity.name.variable.local.map",
+					"match": "@?[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"name": "storage.type.map",
+					"match": "@?[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"parameter-type-annotation": {
+			"patterns": [
+				{
+					"name": "meta.type.annotation.map",
+					"begin": "(:)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.operator.type.annotation.map"
+						}
+					},
+					"end": "(?=[,)])|(?==[^>])",
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					]
+				}
+			]
+		},
+		"type": {
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(readonly)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))\\s*",
+					"captures": {
+						"1": {
+							"name": "storage.modifier.map"
+						}
+					}
+				},
+				{
+					"include": "#type-name"
+				}
+			]
+		},
+		"type-name": {
+			"patterns": [
+				{
+					"begin": "([_$[:alpha:]][_$[:alnum:]]*)\\s*(?:(\\.)|(\\?\\.(?!\\s*[[:digit:]])))\\s*(<)",
+					"captures": {
+						"1": {
+							"name": "entity.name.type.module.map"
+						},
+						"2": {
+							"name": "punctuation.accessor.map"
+						},
+						"3": {
+							"name": "punctuation.accessor.optional.map"
+						},
+						"4": {
+							"name": "meta.type.parameters.map punctuation.definition.typeparameters.begin.map"
+						}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"1": {
+							"name": "meta.type.parameters.map punctuation.definition.typeparameters.end.map"
+						}
+					},
+					"contentName": "meta.type.parameters.map",
+					"patterns": [
+						{
+							"include": "#type-arguments-body"
+						}
+					]
+				},
+				{
+					"begin": "([_$[:alpha:]][_$[:alnum:]]*)\\s*(<)",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.type.map"
+						},
+						"2": {
+							"name": "meta.type.parameters.map punctuation.definition.typeparameters.begin.map"
+						}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"1": {
+							"name": "meta.type.parameters.map punctuation.definition.typeparameters.end.map"
+						}
+					},
+					"contentName": "meta.type.parameters.map",
+					"patterns": [
+						{
+							"include": "#type-arguments-body"
+						}
+					]
+				},
+				{
+					"match": "([_$[:alpha:]][_$[:alnum:]]*)\\s*(?:(\\.)|(\\?\\.(?!\\s*[[:digit:]])))",
+					"captures": {
+						"1": {
+							"name": "entity.name.type.module.map"
+						},
+						"2": {
+							"name": "punctuation.accessor.map"
+						},
+						"3": {
+							"name": "punctuation.accessor.optional.map"
+						}
+					}
+				},
+				{
+					"name": "entity.name.type.map",
+					"match": "[_$[:alpha:]][_$[:alnum:]]*"
+				}
+			]
+		},
+		"type-arguments-body": {
+			"patterns": [
+				{
+					"match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(_)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))",
+					"captures": {
+						"0": {
+							"name": "keyword.operator.type.map"
+						}
+					}
+				},
+				{
+					"include": "#type"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"operator-assignment": {
+			"name": "keyword.operator.assignment.map",
+			"match": "(?<!=|!)(=)(?!=)"
+		},
+		"punctuation-comma": {
+			"name": "punctuation.separator.comma.map",
+			"match": ","
+		},
+		"punctuation-semicolon": {
+			"name": "punctuation.terminator.statement.map",
+			"match": ";"
+		},
+		"operator-arrow": {
+			"name": "keyword.operator.arrow.map",
+			"match": "->"
+		},
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.block.map",
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.map"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.map"
+						}
+					}
+				},
+				{
+					"begin": "(^\\s+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.map"
+						}
+					},
+					"end": "(?=$)",
+					"patterns": [
+						{
+							"name": "comment.block.documentation.map",
+							"begin": "(?<!/)///(?!/)",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.map"
+								}
+							},
+							"end": "(?=$)"
+						},
+						{
+							"name": "comment.line.double-slash.map",
+							"begin": "(?<!/)//(?:(?!/)|(?=//))",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.map"
+								}
+							},
+							"end": "(?=$)"
+						}
+					]
+				}
+			]
+		},
+		"uses-statement-keywords": {
+			"name": "keyword.control.map",
+			"match": "(?<!\\.)\\b(alias|as|source|target|produced)\\b"
+		},
+		"method-parameters-keywords": {
+			"name": "keyword.control.map",
+			"match": "(?<!\\.)\\b(source|target)\\b"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.map",
+					"match": "\\b(map|uses|as|alias|imports|group|extends|where|check|log|then|true|false|types|type|first|not_first|last|not_last|only_one|share|collate|source|target|queried|produced|conceptMap|prefix)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.map",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.map",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.map"
+}

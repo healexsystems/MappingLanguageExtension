@@ -1,8 +1,10 @@
 {
     "name": "fhir-mapping-language-support",
-    "displayName": "FHIR Mapping Language Support",
-    "description": "Support for the FHIR mapping language",
+    "displayName": "FHIR Mapping Language",
+    "description": "Syntax highlighting for the FHIR mapping language",
     "version": "1.0.0",
+    "repository": "https://github.com/healexsystems/MappingLanguageExtension/",
+    "homepage": "https://healex.systems/en/home/",
     "engines": {
         "vscode": "^1.47.0"
     },
@@ -21,5 +23,6 @@
             "scopeName": "source.map",
             "path": "./syntaxes/map.tmLanguage.json"
         }]
-    }
+    },
+    "icon": "icon/Healex_qadra_color_transparent.png"
 }

@@ -1,6 +1,6 @@
 ![Healex](images/healex-icon-cropped.png)
 
-# FHIR Mapping Language syntax highlighter
+# FHIR Mapping Language Syntax Highlighter
 
 This extension provides syntax highlighting for the FHIR Mapping Language and is published and maintained by [Healex](https://healex.systems/en/home/). We are a German company building FHIR based solutions in healthcare.
 
@@ -21,9 +21,9 @@ Make sure to use one of VS Code's default themes for the best experience.
 
 If syntax highlighting is not enabled automatically for your file, do the following: 
 
-1. Select the language mode in the lower right corner of Visual Studio Code ![Full Syntax highlighting for the FHIR Mapping Language](images/select-fhir-mapping-language.jpg)
+1. Select the language mode in the lower right corner of Visual Studio Code ![](images/select-fhir-mapping-language.jpg)
 
-2. Search for 'FHIR Mapping Language' in the dropdown and select 'FHIR Mapping Language' ![Full Syntax highlighting for the FHIR Mapping Language](images/select-fhir-mapping-language-2.jpg)
+2. Search for 'FHIR Mapping Language' in the dropdown and select 'FHIR Mapping Language' ![](images/select-fhir-mapping-language-2.jpg)
 
 ## Known Issues
 

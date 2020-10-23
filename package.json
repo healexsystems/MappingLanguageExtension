@@ -1,8 +1,10 @@
 {
-    "name": "hl7-mapping-language-support",
-    "displayName": "HL7 Mapping Language Support",
-    "description": "hl7 .map files support",
-    "version": "0.0.1",
+    "name": "fhir-mapping-language-support",
+    "displayName": "FHIR Mapping Language",
+    "description": "Syntax highlighting for the FHIR mapping language",
+    "version": "1.0.0",
+    "repository": "https://github.com/healexsystems/MappingLanguageExtension/",
+    "homepage": "https://healex.systems/en/home/",
     "engines": {
         "vscode": "^1.47.0"
     },
@@ -12,7 +14,7 @@
     "contributes": {
         "languages": [{
             "id": "map",
-            "aliases": ["hl7 mapping language", "map"],
+            "aliases": ["FHIR Mapping Language", "map"],
             "extensions": [".map"],
             "configuration": "./language-configuration.json"
         }],
@@ -21,5 +23,6 @@
             "scopeName": "source.map",
             "path": "./syntaxes/map.tmLanguage.json"
         }]
-    }
+    },
+    "icon": "icon/Healex_qadra_color_transparent.png"
 }

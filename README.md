@@ -1,19 +1,23 @@
-# FHIR Mapping Language
+# FHIR Mapping Language syntax highlighter
 
 This extension provides syntax highlighting for the FHIR Mapping Language. It is published and maintained by [Healex](https://healex.systems/en/home/), a German company building FHIR solutions in healthcare.
 
+![Full Syntax highlighting for the FHIR Mapping Language](images/fhir-mapping-language.jpg)
+
+## Quick Start
+
+1. Install this extension
+2. Open a .map file
+
+If syntax highlighting is not enabled automatically for your file, do the following: 
+
+1. Select the language mode in the lower right corner of Visual Studio Code ![Full Syntax highlighting for the FHIR Mapping Language](images/select-fhir-mapping-language.jpg)
+
+2. Search for 'FHIR Mapping Language' in the dropdown and select 'FHIR Mapping Language' ![Full Syntax highlighting for the FHIR Mapping Language](images/select-fhir-mapping-language-2.jpg)
+
+
 ## Features
-
-This extension will enable full
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
+This extension adds full syntax highlighting support for the FHIR Mapping Language. It is automatically enabled for .map files but can be activated manually for any file type.
 
 ## Known Issues
 

@@ -1,8 +1,8 @@
 {
-    "name": "hl7-mapping-language-support",
-    "displayName": "HL7 Mapping Language Support",
-    "description": "hl7 .map files support",
-    "version": "0.0.1",
+    "name": "fhir-mapping-language-support",
+    "displayName": "FHIR Mapping Language Support",
+    "description": "Support for the FHIR mapping language",
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.47.0"
     },
@@ -12,7 +12,7 @@
     "contributes": {
         "languages": [{
             "id": "map",
-            "aliases": ["hl7 mapping language", "map"],
+            "aliases": ["FHIR Mapping Language", "map"],
             "extensions": [".map"],
             "configuration": "./language-configuration.json"
         }],

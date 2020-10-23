@@ -1,6 +1,6 @@
 # FHIR Mapping Language syntax highlighter
 
-This extension provides syntax highlighting for the FHIR Mapping Language. It is published and maintained by [Healex](https://healex.systems/en/home/), a German company building FHIR solutions in healthcare.
+This extension provides syntax highlighting for the FHIR Mapping Language. It is published and maintained by [Healex](https://healex.systems/en/home/), a German company building FHIR based solutions in healthcare.
 
 ![Full Syntax highlighting for the FHIR Mapping Language](images/fhir-mapping-language.jpg)
 
@@ -8,6 +8,7 @@ This extension provides syntax highlighting for the FHIR Mapping Language. It is
 
 1. Install this extension
 2. Open a .map file
+3. Done!
 
 If syntax highlighting is not enabled automatically for your file, do the following: 
 
@@ -19,13 +20,14 @@ If syntax highlighting is not enabled automatically for your file, do the follow
 ## Features
 This extension adds full syntax highlighting support for the FHIR Mapping Language. It is automatically enabled for .map files but can be activated manually for any file type.
 
+Make sure to use one of VS Code's default themes for the best experience.
+
 ## Known Issues
 
 1. There are minor highlighting inconsistencies for multiline strings. Feel free to submit a pull request with a solution for this issue. 
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 

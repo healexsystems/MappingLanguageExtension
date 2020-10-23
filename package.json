@@ -24,5 +24,5 @@
             "path": "./syntaxes/map.tmLanguage.json"
         }]
     },
-    "icon": "icon/Healex_qadra_color_transparent.png"
+    "icon": "images/healex-icon.png"
 }
